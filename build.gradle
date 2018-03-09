@@ -1,0 +1,33 @@
+group 'nettydemo'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+def nativeClassifier
+def osName = System.getProperty('os.name').toLowerCase()
+
+if (osName.contains('win')) {
+    nativeClassifier = 'windows-x86_64'
+} else if (osName.contains('linux')) {
+    nativeClassifier = 'linux-x86_64'
+} else if (osName.contains('mac')) {
+    nativeClassifier = 'osx-x86_64'
+} else {
+    throw new InvalidUserDataException("Unsupoprted os family $osName")
+}
+
+dependencies {
+    compile group: 'io.netty', name: 'netty-codec-http2', version: netty_version
+    compile group: 'org.eclipse.jetty.alpn', name: 'alpn-api', version: jetty_alpn_api_version
+    compile group: 'io.netty', name: 'netty-codec-http2', version: netty_version
+    compile group: 'io.netty', name: 'netty-tcnative-boringssl-static', version: netty_tcnative_version, classifier: nativeClassifier
+    testCompile group: 'junit', name: 'junit', version: junit_version
+
+}
