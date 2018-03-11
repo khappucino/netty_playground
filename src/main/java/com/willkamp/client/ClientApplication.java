@@ -1,6 +1,7 @@
-package com.willkamp.server;
+package com.willkamp.client;
 
-public class Application {
+
+public class ClientApplication {
 
     public static void main(String[] args) throws Exception {
         final int port;
@@ -10,7 +11,7 @@ public class Application {
             System.out.println("Using default port: 8080");
             port = 8080;
         }
-        EchoServer echoServer = new EchoServer(port);
-        echoServer.start();
+        EchoClient echoClient = new EchoClient(port);
+        echoClient.start();
     }
 }

@@ -11,11 +11,9 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import java.net.InetSocketAddress;
 
 public class EchoClient {
-    private final String host;
     private final int port;
 
-    public EchoClient(String host, int port) {
-        this.host = host;
+    EchoClient(int port) {
         this.port = port;
     }
 
@@ -25,7 +23,7 @@ public class EchoClient {
             Bootstrap bootstrap = new Bootstrap();
             bootstrap.group(group)
                     .channel(NioSocketChannel.class)
-                    .remoteAddress(new InetSocketAddress(host, port))
+                    .remoteAddress(new InetSocketAddress("localhost", port))
                     .handler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
