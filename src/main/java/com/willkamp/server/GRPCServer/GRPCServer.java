@@ -13,6 +13,16 @@ import java.net.InetSocketAddress;
 
 public class GRPCServer {
 
+  public static void main(String[] args) {
+    GRPCServer server = new GRPCServer();
+    try {
+      server.start(8080);
+    }
+    catch(Exception e) {
+
+    }
+  }
+
   public void start(int port) throws Exception {
     EventLoopGroup bossGroup = new NioEventLoopGroup();
     EventLoopGroup workerGroup = new NioEventLoopGroup();
